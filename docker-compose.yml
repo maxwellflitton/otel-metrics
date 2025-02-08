@@ -10,15 +10,6 @@ services:
       - "14268"
       - "14250"
 
-  # Zipkin
-  zipkin-all-in-one:
-    image: openzipkin/zipkin:latest
-    environment:
-      - JAVA_OPTS=-Xms1024m -Xmx1024m -XX:+ExitOnOutOfMemoryError
-    restart: always
-    ports:
-      - "9411:9411"
-
   # Collector
   otel-collector:
     image: otel/opentelemetry-collector:0.119.0
@@ -36,7 +27,6 @@ services:
       - "55679:55679" # zpages extension
     depends_on:
       - jaeger-all-in-one
-      - zipkin-all-in-one
 
   prometheus:
     image: prom/prometheus:latest

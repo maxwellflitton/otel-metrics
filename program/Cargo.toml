@@ -4,3 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+t-logging = { path = "../t-logging" }
+tokio = { version = "1.43.0", features = ["full"] }
+# work on exporting this with the t-logging
+# tracing = "0.1"
+# tracing-subscriber = { version = "0.3", features = ["std", "env-filter", "fmt"] }
+# tracing-opentelemetry = "0.28.0"
+# opentelemetry = { version = "0.27.1", features = ["trace"] }
+# opentelemetry_sdk = { version = "0.27.1", features = ["rt-tokio"]}
+# opentelemetry-stdout = "0.27.0"
