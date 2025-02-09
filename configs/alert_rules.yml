@@ -1,0 +1,17 @@
+groups:
+  - name: alert_rules
+    rules:
+      - alert: ErrorThresholdExceeded
+        expr: total_errors > 0
+        for: 1s
+        labels:
+          severity: critical
+        annotations:
+          description: "Error counter increased in my-rust-metric-service"
+      - alert: ErrorThresholdExceeded
+        expr: errors_total > 0
+        for: 1s
+        labels:
+          severity: critical
+        annotations:
+          description: "Error counter increased in my-rust-metric-service"

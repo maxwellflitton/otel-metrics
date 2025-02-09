@@ -80,12 +80,12 @@ pub fn init_meter_provider() -> opentelemetry_sdk::metrics::SdkMeterProvider {
             None
         }
     };
-
+    // http://otel-collector:4318/v1/metrics
     let client = reqwest::Client::new();
     let exporter = opentelemetry_otlp::MetricExporter::builder()
         .with_http()
         .with_endpoint("http://localhost:4318/v1/metrics")
-        // .with_endpoint("http://localhost:4318")
+        // .with_endpoint("http://otel-collector:4318/v1/metrics")
         .with_http_client(client)
         .with_temporality(Temporality::Delta)
         .build().unwrap();

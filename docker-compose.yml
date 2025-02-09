@@ -3,7 +3,7 @@ services:
 
   # Jaeger
   jaeger-all-in-one:
-    image: jaegertracing/all-in-one:latest
+    image: jaegertracing/jaeger:2.3.0
     restart: always
     ports:
       - "16686:16686"
@@ -35,3 +35,42 @@ services:
       - ./configs/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
+    depends_on:
+      - otel-collector
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      # - grafana-data:/var/lib/grafana
+      - ./configs/grafana-provisioning:/etc/grafana/provisioning
+    depends_on:
+      - prometheus
+      - jaeger-all-in-one
+
+# volumes:
+#   grafana-data:
+
+
+  # # Alertmanager
+  # alertmanager:
+  #   image: prom/alertmanager:latest
+  #   restart: always
+  #   volumes:
+  #     - ./configs/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+  #   ports:
+  #     - "9093:9093"
+
+  # # Rust Service
+  # rust-webhook-service:
+  #   build: ./server
+  #   restart: always
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - otel-collector

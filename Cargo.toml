@@ -2,7 +2,7 @@
 resolver = "2"
 members = [
     "dal", 
-    "kernel", 
+    "kernel", "poll-program", 
     "program", "server", "t-logging", 
     "trigger"
 ]
