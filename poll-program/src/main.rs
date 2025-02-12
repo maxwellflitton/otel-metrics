@@ -6,7 +6,8 @@ use std::thread;
 use std::time::Duration;
 
 const PROMETHEUS_URL: &str = "http://localhost:9090/api/v1/query";
-const QUERY: &str = "errors_total{exported_job=\"my-rust-metric-service\", job=\"otel-collector\"}";
+// const QUERY: &str = "errors_total{exported_job=\"my-rust-metric-service\", job=\"otel-collector\"}";
+const QUERY: &str = "calls_total";
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {

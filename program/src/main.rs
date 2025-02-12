@@ -58,7 +58,9 @@ async fn main() {
     sleep(Duration::from_secs(10)).await;
 }
 
-// #[myotel::instrument(level = "info", fields(user_id = 42))]
+
+
+#[tracing::instrument(level = "info", fields(user_id = 42))]
 async fn async_task() {
     let span = span!(Level::INFO, "async_task", task_id = "task_123");
     let _guard = span.enter();

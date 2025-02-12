@@ -33,6 +33,12 @@ services:
     restart: always
     volumes:
       - ./configs/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus-data:/prometheus  # Persisted storage
+    environment:
+      - PROMETHEUS_CONFIG_FILE=/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=15d"
     ports:
       - "9090:9090"
     depends_on:
